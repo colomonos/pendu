@@ -18,9 +18,6 @@ import java.util.Arrays;
 import java.io.File;
 import java.util.ArrayList;
 
-
-
-
 /**
  * Vue du jeu du pendu
  */
@@ -66,6 +63,9 @@ public class Pendu extends Application {
     /*** le bouton qui permet de (lancer ou relancer une partie*/ 
     private Button bJouer;
 
+
+    private ImageView img ;
+    
     /*** initialise les attributs (créer le modèle, charge les images, crée le chrono ...)*/
     @Override
     public void init() {
@@ -73,6 +73,9 @@ public class Pendu extends Application {
         this.lesImages = new ArrayList<Image>();
         this.chargerImages("./img");
         // A terminer d'implementer
+        this.img = new ImageView();
+
+
     }
 
     /**
@@ -92,8 +95,15 @@ public class Pendu extends Application {
         // A implementer ø
                  
         Pane banniere = new Pane();
+        HBox listbutton = new HBox();
+
         Label titre = new Label("jeu du pendu");
-        banniere.getChildren().add(titre);
+        Button home = new Button("",this.img = new ImageView(this.lesImages.get(0)));
+        Button info = new Button("",this.img = new ImageView(this.lesImages.get(1)));
+        Button param = new Button("",this.img = new ImageView(this.lesImages.get(2)));
+
+        listbutton.getChildren().addAll(home, info,param);
+        banniere.getChildren().addAll(titre,listbutton);
         return banniere;
     }
 
@@ -139,13 +149,37 @@ public class Pendu extends Application {
 
     public void modeAccueil(){
         // A implementer
+        
+        BorderPane bord = new BorderPane();
 
-        if (){
-        ImageView image = new ImageView("img/home.png");
-        }
-        else{
-            
-        }
+
+        VBox centre =new VBox();
+
+        TitledPane choix = new TitledPane();
+        
+        VBox bouttonrad =new VBox();
+        RadioButton button1 = new RadioButton("Facile");
+        button1.setSelected(true);
+        RadioButton button2 = new RadioButton("Medium");
+        RadioButton button3 = new RadioButton("Difficile");
+        RadioButton button4 = new RadioButton("Exper");
+        bouttonrad.getChildren().addAll(button1, button2,button3,button4);
+       
+       
+        choix.setText("niveau de difficulter");
+        choix.setContent(bouttonrad);
+
+        Button lancer = new Button("lancer partie");
+
+        centre.getChildren().addAll(lancer,choix);
+
+
+        bord.setTop(titre());
+        bord.setCenter(centre);
+
+
+
+
 
     }
     
@@ -155,6 +189,7 @@ public class Pendu extends Application {
     
     public void modeParametres(){
         // A implémenter
+        
     }
 
     /** lance une partie */
